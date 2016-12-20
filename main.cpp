@@ -39,6 +39,8 @@ int main(int argc, char **argv)
             cin >> nm(i, j);
         }
     }
+    nm.print();
+    cout<< "norm is " << nm.norm1() << endl;
 
     for(int i = 0; i < n; ++i){
         cout << "enter element of b[" << i << "] = ";
@@ -168,9 +170,17 @@ int main(int argc, char **argv)
         return 0;
     }
 
-    // the only thing remained is cond_1
+    if(!nm.determinant()){
+        cout << "determinant is zero, matrix is not inversable" << endl;
+        exit(0);
+    }
+    
+    NaiveMatrix<long double> nmi = nm;
+    nmi.invert();
+    cout << "inverse matrix is : " << endl;
+    nmi.print();
 
-
+    cout << "cond_1 is " << nm.norm1() * nmi.norm1() << endl;
     return 0;
 }
 
